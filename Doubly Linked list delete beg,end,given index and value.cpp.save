@@ -1,0 +1,195 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct node
+{
+    int data;
+    node *next;
+    node *prev;
+};
+node *first = NULL;///empty list
+node *last = NULL;
+
+node* creatnode(int item)
+{
+    node *newNode = new node;
+    if(newNode==NULL)
+    {
+        cout<<"Overflow"<<endl;
+        exit(1);
+    }
+    newNode->data=item;
+    newNode->next=NULL;
+    newNode->prev=NULL;
+    return newNode;
+
+}
+void insert_at_begining(node* new_node)
+{
+    if(first==NULL and last==NULL)
+    {
+        first=new_node;
+        last= new_node;
+    }
+    else
+    {
+        new_node->next = first;
+        first->prev = new_node;
+        first = new_node;
+    }
+}
+void insert_at_ending(node *new_node)
+{
+    node *ptr = first;
+    if(first==NULL and last==NULL)
+    {
+        insert_at_begining(new_node);
+    }
+    else
+    {
+        while(ptr->next!=NULL)
+        {
+            ptr=ptr->next;
+        }
+        ptr->next = new_node;
+        new_node->prev=ptr;
+        last = new_node;
+    }
+}
+void insert_after_given_value(node *new_NODE,int value)
+{
+    node* ptr = first,*NEXTP=first->next;
+    if(first==NULL and last==NULL){
+        first = new_NODE;
+        last = new_NODE;
+    }
+    else
+    {
+        while(ptr->data!=value)
+        {
+            ptr = ptr->next;
+            NEXTP=NEXTP->next;
+        }
+        new_NODE->next = ptr->next;
+        ptr->next = new_NODE;
+        new_NODE->prev = ptr;
+        NEXTP->prev=new_NODE;
+    }
+
+}
+void insert_after_given_pos(node *new_NODE,int pos,int n)
+{
+    int i=0;
+    node* ptr = first,*NEXTP=first->next;
+    if(first==NULL and last==NULL){
+        first = new_NODE;
+        last = new_NODE;
+    }
+    else if(pos==n)insert_at_begining(new_NODE);
+    else
+    {
+        while(i<pos-1)
+        {
+            ptr = ptr->next;
+            NEXTP=NEXTP->next;
+            ++i;
+        }
+        new_NODE->next = ptr->next;
+        ptr->next = new_NODE;
+        new_NODE->prev = ptr;
+        NEXTP->prev=new_NODE;
+    }
+
+}
+
+
+void delete_first()
+{
+    first= first->next;
+    first->prev=NULL;
+}
+
+
+void delete_last()
+{
+    node *ptr = first,*q;
+    while(ptr->next!=NULL)
+    {
+        q=ptr;
+        ptr=ptr->next;
+    }
+    q->next=NULL;
+    last = q;
+}
+void delete_value(int value)
+{
+    node *ptr = first,*q;
+    if(ptr->data==value){
+        ptr=ptr->next;
+        ptr->prev=NULL;
+    }
+    else{
+    while(ptr->data!=value and ptr->next!=NULL){
+
+        q=ptr;
+        ptr=ptr->next;
+    }
+    }
+    if(ptr -> data == value && ptr -> next != NULL){ //if item found and PTR is not last node
+        ptr-> prev -> next = ptr -> next; //storing PTR's next node's address to FORW part of PTR's previous node
+        ptr ->next -> prev = ptr -> prev; //storing PTR's previous node's address to BACK part of PTR's next node
+    }
+    else if(ptr-> data == value && ptr -> next == NULL){ //if item found and PTR is last node
+        delete_last(); //PRE node's FORW part now NULL. So last element lost
+    }
+}
+
+void traverse()
+{
+    node * ptr = first;
+    while(ptr!=NULL)
+    {
+        cout<<ptr->data<<" ";
+        ptr = ptr->next;
+    }
+    cout<<endl;
+    node * ptr2 = last;
+    while(ptr2!=NULL)
+    {
+        cout<<ptr2->data<<" ";
+        ptr2 = ptr2->prev;
+    }
+    cout<<endl;
+}
+int main()
+{
+    int item,n;cin>>n;
+    for(int i=0;i<n;++i){
+        cin>>item;
+        node * NewNode = creatnode(item);
+        insert_at_ending(NewNode);
+    }
+
+//    int i,pos;cin>>i>>pos;
+//    traverse();
+//    node*NewNode = creatnode(i);
+//    insert_after_given_pos(NewNode,pos,n);
+//    delete_first();
+//    traverse();
+//    delete_last();
+//    traverse();
+    int value
+    traverse();
+    insert_after_given_value()
+    traverse();
+}
+
+
+
+
+
+
+
+
+
+
+
