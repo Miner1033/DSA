@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define dgm_naxmul59 ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+
+
+int main()
+{
+    dgm_naxmul59
+
+    int n,m;cin>>n>>m;
+    
+    int p[n];
+    int w[n];
+    
+    for( int i=0;i<n;++i ){
+        cin>>p[i];
+    }
+    for( int i=0;i<n;++i ){
+        cin>>w[i];
+    }
+    
+    int v[n+1][m+1];
+    
+    for( int i=0;i<=n;++i ){///
+            v[i][0]=0;
+    }
+    for( int j=0;j<=n;++j ){
+        v[0][i]=0;
+    }
+    
+    for( int i=1;i<=n;++i ){
+            for( int j=1;j<=m;++j ){
+                    if(j<w[i-1]){
+                            v[i][j]=v[i-1][j-1];
+                    }
+                    else{
+                            v[i][j] = max(v[i-1][j-1],v[i-1][j-w[i-1]]);
+                    }
+            }
+    }
+    for( int i=1;i<=n;++i ){
+            for( int j=1;j<=m;++j ){
+                    cout<<
+            }
+    }
+    
+}
+
+
+/**
+
+4 8
+1 2 5 6
+2 3 4 5
+
+*/
+
+
+
+
+
